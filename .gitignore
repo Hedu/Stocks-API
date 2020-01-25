@@ -1,0 +1,6 @@
+# Compiled classes
+**/target
+
+# Idea files
+**/*.iml
+**/.idea
