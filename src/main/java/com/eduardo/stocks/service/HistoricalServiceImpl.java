@@ -20,13 +20,14 @@ public class HistoricalServiceImpl implements HistoricalService{
     @Override
     public void addPrice(Stock stock) {
         Long id = stock.getId();
-        if (historicalStocks.containsKey(id)) {
-            historicalStocks.get(id).add(stock);
-        }
-        else {
-            List<Stock> stocks= new ArrayList<>();
-            stocks.add(stock);
-            historicalStocks.put(id, stocks);
+        synchronized(this) {
+            if (historicalStocks.containsKey(id)) {
+                historicalStocks.get(id).add(stock);
+            } else {
+                List<Stock> stocks = new ArrayList<>();
+                stocks.add(stock);
+                historicalStocks.put(id, stocks);
+            }
         }
     }
 }

@@ -53,7 +53,10 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public Stock addStock(StockForm stockForm) {
-        Long newId = ++lastId;
+        Long newId;
+        synchronized(this) {
+            newId = ++lastId;
+        }
         Stock newStock = stockBuilderFactory.getBuilder()
             .setId(newId)
             .setName(stockForm.getName())
