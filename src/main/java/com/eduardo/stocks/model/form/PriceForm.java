@@ -1,7 +1,5 @@
 package com.eduardo.stocks.model.form;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 
 public class PriceForm {
