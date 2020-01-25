@@ -4,3 +4,6 @@
 # Idea files
 **/*.iml
 **/.idea
+
+# Node cache
+**/node_modules
