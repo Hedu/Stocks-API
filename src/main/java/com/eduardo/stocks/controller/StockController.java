@@ -5,7 +5,9 @@ import com.eduardo.stocks.model.form.PriceForm;
 import com.eduardo.stocks.model.form.StockForm;
 import com.eduardo.stocks.service.HistoricalService;
 import com.eduardo.stocks.service.StockService;
+import com.eduardo.stocks.util.RestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,16 +36,16 @@ public class StockController {
         value = "/{id}",
         method = RequestMethod.GET,
         produces = "application/json")
-    public Stock getStock(@PathVariable Long id) {
-        return stockService.getById(id);
+    public ResponseEntity<Stock> getStock(@PathVariable Long id) {
+        return RestUtils.getResponseEntity(stockService.getById(id));
     }
 
     @RequestMapping(
         value = "/{id}/historical",
         method = RequestMethod.GET,
         produces = "application/json")
-    public List<Stock> getHistorical(@PathVariable Long id) {
-        return historicalService.getPrices(id);
+    public ResponseEntity<List<Stock>> getHistorical(@PathVariable Long id) {
+        return RestUtils.getResponseEntity(historicalService.getPrices(id));
     }
 
     @RequestMapping(
@@ -51,8 +53,8 @@ public class StockController {
         method = RequestMethod.PUT,
         consumes = "application/json",
         produces = "application/json")
-    public Stock updateStock(@PathVariable Long id, @RequestBody PriceForm priceForm) {
-        return stockService.updateStock(id, priceForm);
+    public ResponseEntity<Stock> updateStock(@PathVariable Long id, @RequestBody PriceForm priceForm) {
+        return RestUtils.getResponseEntity(stockService.updateStock(id, priceForm));
     }
 
     @RequestMapping(
