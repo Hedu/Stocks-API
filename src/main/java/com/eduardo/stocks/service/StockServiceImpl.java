@@ -18,6 +18,9 @@ public class StockServiceImpl implements StockService{
     @Autowired
     private StockBuilderFactory stockBuilderFactory;
 
+    @Autowired
+    private HistoricalService historicalService;
+
     private ConcurrentHashMap<Long, Stock> stocks = new ConcurrentHashMap<>();
     private Long lastId = -1L;
 
@@ -35,6 +38,7 @@ public class StockServiceImpl implements StockService{
     public Stock updateStock(Long id, PriceForm priceForm) {
         if (stocks.containsKey(id)) {
             Stock stock = stocks.get(id);
+            historicalService.addPrice(stock);
             Stock newStock = stockBuilderFactory.getBuilder()
                 .setId(id)
                 .setName(stock.getName())
@@ -42,6 +46,7 @@ public class StockServiceImpl implements StockService{
                 .setLastUpdate(LocalDateTime.now())
                 .build();
             stocks.put(id, newStock);
+            return newStock;
         }
         return null;
     }
