@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -45,7 +46,7 @@ public class ConcurrentTest {
 
         Collection<Future<Stock>> futures = new ArrayList<>(threads);
         for (int t = 0; t < threads; ++t) {
-            final StockForm stockForm = new StockForm();
+            final StockForm stockForm = new StockForm("name", BigDecimal.ZERO);
             futures.add(
                 service.submit(
                     () -> {

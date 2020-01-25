@@ -1,11 +1,15 @@
 package com.eduardo.stocks.model.form;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class StockForm {
     private String name;
     private BigDecimal currentPrice;
+
+    public StockForm(String name, BigDecimal currentPrice) {
+        this.name = name;
+        this.currentPrice = currentPrice;
+    }
 
     public String getName() {
         return name;
