@@ -1,4 +1,4 @@
-#Stock rest API
+# Stock rest API
 
 This project uses maven and is based on spring boot, so the easiest way of running it is to execute:
 
